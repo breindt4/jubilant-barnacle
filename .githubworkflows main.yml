@@ -1,0 +1,73 @@
+yaml
+
+Copy code
+# .github/workflows/main.yml
+
+name: AEINST ICO Fund CI Pipeline:
+
+
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Lint check
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Success badge marker
+        if: success()
+        run: echo "✅ AEINST CI build passed."
+
+
+Save this file as:
+.github/workflows/main.yml
+
+AEINST ICO Fund CI Pipeline:
+
+A package.json with scripts:
+
+"test" for tests
+
+"build" for building (optional)
+
+"lint" for formatting check
+
+Pushed changes to main branch.
+
+🔗 Badge Fix for README.md
+
+
+markdown
+[![AEINST ICO Fund CI Pipeline](https://github.com/breindt4/jubilant-barnacle/actions/workflows/main.yml/badge.svg)](https://github.com/breindt4/jubilant-barnacle/actions/workflows/main.yml)
+
+
+🧪 Optional Next Enhancements
+deployment to Netlify/Vercel/Heroku
+
+Cache node modules for faster builds
+
+ secrets (API keys, tokens) for protected builds
+
+Slack or Telegram bot notifications on build result
+
